@@ -1,9 +1,0 @@
-pyproject.toml
-src/ingredient.py
-src/main.py
-src/recipe.py
-src/mealplanner.egg-info/PKG-INFO
-src/mealplanner.egg-info/SOURCES.txt
-src/mealplanner.egg-info/dependency_links.txt
-src/mealplanner.egg-info/top_level.txt
-tests/test_ingredient.py
