@@ -36,42 +36,66 @@
 <span></span><span class="k">class</span><span class="w"> </span><span class="nc">Ingredient</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents one portion of ingredient. Contains the name and description of the given ingredient.</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        name (str): The name of the ingredient.</span>
-<span class="sd">        desc (str): A brief description of the ingredient</span>
-
 <span class="sd">    Example:</span>
 <span class="sd">        The Ingredient class is contructed like so:</span>
 <span class="sd">        ::</span>
-<span class="sd">            $ Ingredient(&quot;steak&quot;, &quot;ideally ribeye&quot;)</span>
+
+<span class="sd">            $ Ingredient(&quot;steak&quot;, &quot;ideally cheap&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">NAME_MAX_LENGTH</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">DESCRIPTION_MAX_LENGTH</span> <span class="o">=</span> <span class="mi">128</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">desc</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="n">desc</span>
     
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Name of the ingredient.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Non-empty string within 32 characters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
     
     <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="c1">#First check if string</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ingredient name must be a string, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1">#Check if string length is between 1 and max length</span>
+        <span class="n">_stripped_value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_stripped_value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The name of the ingredient cannot be blank&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">_stripped_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">NAME_MAX_LENGTH</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Ingredient name cannot exceed 32 characters&quot;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">_stripped_value</span>
     
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">desc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Description of the ingredient</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: String within 128 characters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_desc</span>
     
     <span class="nd">@desc</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">desc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_desc</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">_stripped_value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="c1">#Check if string exceeds length</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_stripped_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">DESCRIPTION_MAX_LENGTH</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Ingredient description cannot exceed 128 characters&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_desc</span> <span class="o">=</span> <span class="n">_stripped_value</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ingredient_dict</span><span class="p">)</span></div>
 
-    
-
-<span class="n">test</span> <span class="o">=</span> <span class="n">Ingredient</span><span class="p">(</span><span class="s2">&quot;testname&quot;</span><span class="p">,</span> <span class="s2">&quot;desc&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 
           </div>

@@ -1,9 +1,9 @@
-MealPlanner
-===========
+src
+===
 
 .. toctree::
    :maxdepth: 4
 
    ingredient
-   recipe
    main
+   recipe

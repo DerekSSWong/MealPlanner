@@ -1,14 +1,11 @@
 class Ingredient:
     """Represents one portion of ingredient. Contains the name and description of the given ingredient.
 
-    Attributes:
-        name (str): The name of the ingredient, must be a non-empty string
-        desc (str): A brief description of the ingredient
-
     Example:
         The Ingredient class is contructed like so:
         ::
-            $ Ingredient("steak", "ideally ribeye")
+
+            $ Ingredient("steak", "ideally cheap")
     """
 
     NAME_MAX_LENGTH = 32
@@ -20,6 +17,11 @@ class Ingredient:
     
     @property
     def name(self):
+        """Name of the ingredient.
+
+        Returns:
+            str: Non-empty string within 32 characters.
+        """
         return self._name
     
     @name.setter
@@ -39,6 +41,11 @@ class Ingredient:
     
     @property
     def desc(self):
+        """Description of the ingredient
+
+        Returns:
+            str: String within 128 characters
+        """
         return self._desc
     
     @desc.setter

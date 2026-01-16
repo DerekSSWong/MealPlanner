@@ -5,11 +5,6 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-# Make project root importable
-
-import os
-import sys
-sys.path.insert(0, os.path.abspath("../.."))
 
 project = 'MealPlanner'
 copyright = '2026, DerekSSWong'
@@ -18,15 +13,15 @@ author = 'DerekSSWong'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.napoleon",
-    "sphinx.ext.viewcode",
-]
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../../src'))
 
-# Optional Napoleon settings
-napoleon_google_docstring = True
-napoleon_numpy_docstring = False
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
+]
 
 templates_path = ['_templates']
 exclude_patterns = []
