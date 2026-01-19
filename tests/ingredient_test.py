@@ -1,8 +1,6 @@
 import pytest
 from ingredient import Ingredient
 
-
-
 def test_get_name():
     test_ingredient = Ingredient("Prawn", "Frozen is fine")
     assert test_ingredient.name == "Prawn"
